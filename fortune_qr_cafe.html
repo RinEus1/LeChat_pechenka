@@ -1,0 +1,89 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Предсказание дня</title>
+
+<style>
+body{
+font-family: Arial, sans-serif;
+background:#fff6e6;
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+margin:0;
+text-align:center;
+}
+
+.card{
+background:white;
+padding:40px;
+border-radius:20px;
+box-shadow:0 10px 30px rgba(0,0,0,0.1);
+max-width:500px;
+}
+
+button{
+margin-top:20px;
+padding:12px 24px;
+font-size:18px;
+border:none;
+border-radius:10px;
+background:#ffb347;
+cursor:pointer;
+}
+
+#fortune{
+font-size:24px;
+margin-top:20px;
+}
+
+.date{
+font-size:14px;
+opacity:0.6;
+margin-top:10px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+<h2>🥠 Предсказание дня</h2>
+<button onclick="getFortune()">Открыть предсказание</button>
+<div id="fortune"></div>
+<div class="date" id="date"></div>
+</div>
+
+<script>
+
+const fortunes = ["Сегодня тебя ждёт приятная неожиданность.", "Маленькое событие сегодня улучшит настроение.", "Сегодня удачный день попробовать что‑то новое.", "Кто‑то сегодня подумает о тебе.", "Твоя идея сегодня окажется особенно удачной.", "Сегодня стоит довериться интуиции.", "Случайная встреча может изменить планы.", "Сегодня ты окажешься в нужное время в нужном месте.", "Улыбка сегодня откроет нужные двери.", "Вечер принесёт приятную новость.", "Сегодня отличный день начать что‑то маленькое, но важное.", "То, что кажется случайностью, окажется удачей.", "Сегодня ты заметишь возможность, которую раньше не видел.", "Небольшой риск сегодня может принести радость.", "Сегодняшний день лучше провести без спешки.", "Сегодня ты вдохновишь кого‑то рядом.", "Твоя энергия сегодня притягивает хорошие события.", "Сегодня удачный момент поговорить по душам.", "Маленькая победа сегодня поднимет настроение.", "Сегодня тебя ждёт неожиданно приятный момент."];
+
+function hash(str){
+let h = 0;
+for (let i = 0; i < str.length; i++){
+h = Math.imul(31, h) + str.charCodeAt(i) | 0;
+}
+return Math.abs(h);
+}
+
+function getFortune(){
+
+let user = navigator.userAgent;
+let date = new Date().toDateString();
+
+let seed = hash(user + date);
+let index = seed % fortunes.length;
+
+document.getElementById("fortune").innerText = fortunes[index];
+document.getElementById("date").innerText = "Предсказание на " + date;
+
+}
+
+</script>
+
+</body>
+</html>
